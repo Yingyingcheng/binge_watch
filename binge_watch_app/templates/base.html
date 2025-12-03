@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binge-Watch Risk App</title>
+    <link rel="stylesheet" href="{% static 'binge_watch/index.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+      rel="stylesheet"
+    />
+    <script src="{% static 'binge_watch/scripts.js' %}"></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <span class="netflix-red">N</span> BINGE-WATCH RISK APP
+      </div>
+      <nav class="main-nav">
+        <a href="{% url 'content_list' %}">Browse</a>
+        <a href="#">My List</a>
+        <a href="#">Profile</a>
+      </nav>
+    </header>
+
+    <main class="main-content-wrapper">
+      {% block content %} {% endblock content %}
+    </main>
+  </body>
+</html>

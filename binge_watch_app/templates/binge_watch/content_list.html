@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="app-dashboard">
+  <div class="user-profile-card">
+    <img
+      src="{% static 'binge_watch/profile.jpg' %}"
+      alt="User Profile"
+      class="profile-photo"
+    />
+    <h2>User Profile</h2>
+    <p>Welcome, **BingeBoss!**</p>
+  </div>
+
+  <div class="review-form-container">
+    <h3>Leave a Review</h3>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group review-selector">
+        <label for="content_id_select">Review Show Title</label>
+        <select name="content_id" id="content_id_select" required>
+          <option value="">-- Select Content to Review --</option>
+          {% for item in contents %}
+          <option value="{{ item.id }}">{{ item.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ review_form.quality_score.id_for_label }}"
+          >Quality Score</label
+        >
+        {{ review_form.quality_score }}
+        <span class="score-display">5.0 🔥</span>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ review_form.binge_risk_score.id_for_label }}"
+          >Risk Score</label
+        >
+        {{ review_form.binge_risk_score }}
+        <span class="score-display">5.0 🔥</span>
+      </div>
+
+      <div class="form-group">
+        <label>{{ review_form.review_text.label }}</label>
+        {{ review_form.review_text }}
+      </div>
+
+      <button type="submit" class="submit-button">Submit Review</button>
+    </form>
+  </div>
+
+  <div class="binge-history-container">
+    <div class="binge-history">
+      <h3>Your Binge History</h3>
+      <div class="history-grid">
+        {% for review in user_history %} {% if review.content %}
+        <div class="history-item">
+          <div class="play-icon">▶</div>
+          <h3>{{ review.content.title }}</h3>
+          <p>Quality: ⭐️ {{ review.quality_score }}/5</p>
+          <p>Risk: 🌶️ {{ review.binge_risk_score }}/5</p>
+          {% if review.review_text %}
+          <p class="review-comment">"{{ review.review_text }}"</p>
+          {% endif %}
+        </div>
+        {% endif %} {% empty %}
+        <p class="subtle-gray">You haven't submitted any reviews yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

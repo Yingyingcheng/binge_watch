@@ -1,0 +1,375 @@
+/* --- GLOBAL STYLES & COLOR SCHEME --- */
+:root {
+  --dark-bg: #141414; /* Deep, dark background */
+  --main-red: #e50914; /* Netflix red */
+  --light-text: #f5f5f5;
+  --subtle-gray: #aaaaaa;
+  --card-bg: #222222;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+  font-family: "Google Sans Flex", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Ensure full page coverage */
+}
+
+/* --- HEADER STYLES --- */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #0a0a0a; /* Slightly darker header */
+  border-bottom: 2px solid var(--main-red);
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.netflix-red {
+  color: var(--main-red);
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+
+.main-nav a {
+  color: var(--light-text);
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.main-nav a:hover {
+  color: var(--main-red);
+}
+
+/* ----------------------------------------------------- */
+/* --- MAIN DASHBOARD LAYOUT (Responsive Grid) --- */
+/* ----------------------------------------------------- */
+
+.main-content-wrapper {
+  padding: 40px 40px 20px 40px;
+  min-height: 90vh;
+}
+
+.app-dashboard {
+  display: grid;
+  /* Desktop Layout: 1.5fr for Profile/History column, 1fr for Review Form column */
+  grid-template-columns: 1.5fr 1fr;
+  /* Review Form spans both rows on desktop */
+  grid-template-rows: auto auto;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- USER PROFILE CARD --- */
+.user-profile-card {
+  /* Position on Desktop */
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  margin-bottom: 30px;
+
+  /* Styling (Shared with review-form-container) */
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.profile-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--main-red);
+  margin-bottom: 15px;
+}
+
+.user-profile-card h2 {
+  font-size: 1.5em;
+  margin: 0 0 5px 0;
+  color: var(--main-red);
+}
+
+.user-profile-card p {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+/* --- REVIEW FORM CONTAINER --- */
+.review-form-container {
+  /* Position on Desktop: Spans both rows in the right column */
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+
+  /* Styling (Shared with user-profile-card) */
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* --- BINGE HISTORY CONTAINER --- */
+/* (Container holds the binge-history section on desktop) */
+.binge-history-container {
+  /* Position on Desktop: Below the profile card in the left column */
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.binge-history h3 {
+  font-size: 1.4em;
+  border-bottom: 1px solid var(--subtle-gray);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.history-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+
+.history-item {
+  background-color: var(--card-bg);
+  border-radius: 6px;
+  padding: 15px;
+  min-width: 150px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.history-item:hover {
+  transform: translateY(-5px);
+}
+
+.play-icon {
+  font-size: 2em;
+  color: var(--main-red);
+  margin-bottom: 10px;
+}
+
+.history-item h3 {
+  font-size: 1em;
+  margin: 0 0 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-comment {
+  font-style: italic;
+  font-size: 0.8em;
+  color: var(--subtle-gray);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #444;
+  white-space: normal;
+}
+
+/* --- DYNAMIC FORM STYLING --- */
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  flex-basis: 100%;
+  margin-bottom: 5px;
+}
+
+.score-display {
+  font-weight: bold;
+  color: var(--main-red);
+  font-size: 1.2em;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Style the range input (slider track and thumb) */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: calc(100% - 70px);
+  height: 8px;
+  background: #555;
+  border-radius: 5px;
+  margin: 10px 0 10px 0;
+  cursor: pointer;
+}
+
+/* Style the slider thumb (the draggable part) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: var(--main-red);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(229, 9, 20, 0.5);
+}
+
+/* Style the textarea */
+textarea {
+  width: 100%;
+  background-color: #333;
+  border: 1px solid #555;
+  color: var(--light-text);
+  padding: 10px;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* --- Select Dropdown Styling (for Content Selection) --- */
+select {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #555;
+  color: var(--light-text);
+  border-radius: 4px;
+  appearance: none;
+}
+
+/* --- REVIEW PAGE STYLING (add_review.html) --- */
+
+.review-page-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.review-page-container h1 {
+  color: var(--main-red);
+  border-bottom: 2px solid var(--subtle-gray);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.review-page-container p {
+  color: var(--subtle-gray);
+  font-size: 0.95em;
+  margin-bottom: 30px;
+}
+
+/* --- SUBMIT BUTTON STYLES --- */
+.submit-button {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 10px;
+
+  /* Appearance and Text */
+  font-family: "Google Sans Flex", sans-serif; /* Use the main body font */
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+
+  /* Colors and Borders */
+  color: var(--light-text); /* Use the bright text color for contrast */
+  background-color: var(--main-red);
+  border: none; /* Remove default border */
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgb(133, 0, 7); /* Subtle red glow/shadow */
+
+  cursor: pointer; /* Change cursor to pointer to indicate clickability */
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #af0914; /* Slightly brighter red on hover */
+  transform: translateY(-1px); /* Slight lift effect */
+  box-shadow: 0 6px 12px rgba(34, 4, 6, 0.6);
+}
+
+.submit-button:active,
+.submit-button:focus {
+  outline: none;
+  background-color: #b70712; /* Darker red on click */
+}
+/* ----------------------------------------------------- */
+/* --- RESPONSIVENESS (Media Queries) --- */
+/* ----------------------------------------------------- */
+
+/* Targets Tablets and Smaller Desktops (Max width 992px) */
+@media (max-width: 992px) {
+  /* Adjust padding for a tighter look */
+  .main-header,
+  .main-content-wrapper {
+    padding: 15px 20px;
+  }
+
+  /* Change the two-column grid ratio for smaller screens */
+  .app-dashboard {
+    grid-template-columns: 1fr 0.8fr; /* Gives the form slightly less space */
+    gap: 20px;
+  }
+}
+
+/* Targets Mobile Devices (Max width 768px) */
+@media (max-width: 768px) {
+  /* 1. Stack the dashboard columns */
+  .app-dashboard {
+    /* Change to a single, stacked column */
+    grid-template-columns: 1fr;
+    /* Reset grid rows to stack automatically based on HTML source order */
+    grid-template-rows: auto;
+    gap: 30px;
+  }
+
+  /* 2. Ensure all three main components occupy the single column */
+  .user-profile-card,
+  .review-form-container,
+  .binge-history-container {
+    grid-column: 1 / 2;
+    grid-row: auto; /* Stacking based on HTML order: Profile -> Review Form -> History */
+  }
+
+  /* 3. Simplify Header/Navigation */
+  .main-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-nav {
+    margin-top: 10px;
+  }
+
+  .main-nav a {
+    margin: 0 10px;
+    font-size: 0.9em;
+  }
+}
+
+/* Targets Small Mobile Screens (Max width 480px) */
+@media (max-width: 480px) {
+  .main-header,
+  .main-content-wrapper {
+    padding: 10px 15px;
+  }
+
+  .history-grid {
+    /* Allow the history cards to be full width and stack vertically */
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .history-item {
+    min-width: 100%; /* Makes the history item full width */
+  }
+}
